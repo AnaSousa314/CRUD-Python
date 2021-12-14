@@ -1,43 +1,54 @@
 <!DOCTYPE html>
+{% load crispy_forms_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <title>Title</title>
 </head>
 <body>
-    <h1>Lista de Funcionários</h1>
 
-    <ul>
-        <li><a href="{% url 'website:index' %}">Página Inicial</a></li>
-        <li><a href="{% url 'website:cadastra_funcionario' %}">Cadastrar Funcionário</a></li>
-        <li><a href="{% url 'website:lista_funcionarios' %}">Lista de Funcionários</a></li>
-    </ul>
+    <header class="container">
+        <h1>Lista de Funcionários</h1>
+    
+        <ul>
+            <li><a href="{% url 'website:index' %}">Página Inicial</a></li>
+            <li><a href="{% url 'website:cadastra_funcionario' %}">Cadastrar Funcionário</a></li>
+            <li><a href="{% url 'website:lista_funcionarios' %}">Lista de Funcionários</a></li>
+        </ul>
+    </header>
 
-    <div style="max-width: 50%;">
-        <table style="border: 1px solid #BBB; width: 100%;">
-            <thead>
-                <tr style="border-bottom: 1px solid #AAA">
-                    <td><b>Nome</b></td>
-                    <td><b>CPF</b></td>
-                    <td><b>Remuneração</b></td>
-                    <td><b>Tempo de Serviço</b></td>
-                    <td><b>Ações</b></td>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% for funcionario in funcionarios %}
+    <main class="container">
+        <div class="d-flex">
+            <table class="w-75 text-center table table-bordered">
+                <thead class="bg-light">
                     <tr>
-                        <td>{{ funcionario.nome }} {{ funcionario.sobrenome }}</td>
-                        <td>{{ funcionario.cpf }}</td>
-                        <td>{{ funcionario.remuneracao }}</td>
-                        <td>{{ funcionario.tempo_de_servico }}</td>
-                        <td><a href="{% url 'website:atualiza_funcionario' pk=funcionario.id %}">Atualizar</a></td>
-                        <td><a href="{% url 'website:deleta_funcionario' pk=funcionario.id %}">Excluir</a></td>
+                        <td><b>Nome</b></td>
+                        <td><b>CPF</b></td>
+                        <td><b>Remuneração</b></td>
+                        <td><b>Tempo de Serviço</b></td>
+                        <td colspan="2"><b>Ações</b></td>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                </thead>
+    
+                <tbody>
+                    {% for funcionario in funcionarios %}
+                        <tr>
+                            <td>{{ funcionario.nome }} {{ funcionario.sobrenome }}</td>
+                            <td>{{ funcionario.cpf }}</td>
+                            <td>{{ funcionario.remuneracao }}</td>
+                            <td>{{ funcionario.tempo_de_servico }}</td>
+                            <td><a href="{% url 'website:atualiza_funcionario' pk=funcionario.id %}">Atualizar</a></td>
+                            <td><a href="{% url 'website:deleta_funcionario' pk=funcionario.id %}">Excluir</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                
+            </table>
+        </div>
+    </main>
+
 </body>
 </html>

@@ -34,10 +34,12 @@ class FuncionarioListView(ListView):
 #     ]
 
 class FuncionarioUpdateView(UpdateView):
-    template_name="atualiza.html"
+    template_name="website/atualiza.html"
     model = Funcionario
     fields = '__all__'
     context_object_name = 'funcionario'
+    success_url = reverse_lazy("website:lista_funcionarios")
+
 
     def get_object(self,queryset=None):
         funcionario = None
@@ -47,7 +49,7 @@ class FuncionarioUpdateView(UpdateView):
 
         if pk is not None:
             # Busca pelo ID
-            funcionario = Funcionario.objetos.filter(id=pk).firts()
+            funcionario = Funcionario.objetos.filter(pk=pk).first()
 
         elif slug is not None:
             # pega o slug do Model
